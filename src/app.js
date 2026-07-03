@@ -3,12 +3,13 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import errorHandler from "./middlewares/error.middleware.js";
 import notFound from "./middlewares/notFound.middleware.js";
+import { env } from "./config/env.js";
 
 const app = express();
 
 // Global Middlewares
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: env.CLIENT_URL || 'http://localhost:3000',
     credentials: true
 }));
 app.use(express.json());
