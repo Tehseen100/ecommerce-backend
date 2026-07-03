@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
+import errorHandler from "./middlewares/error.middleware.js";
+import notFound from "./middlewares/notFound.middleware.js";
 
 const app = express();
 
@@ -21,5 +22,8 @@ app.get('/health', (req, res) => {
     });
 });
 
+// Error Handling Middleware
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
