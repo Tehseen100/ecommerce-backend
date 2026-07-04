@@ -4,10 +4,19 @@ import { isAdmin } from '../middlewares/isAdmin.middleware.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { validate } from '../middlewares/validate.middleware.js';
 import { createProductSchema } from '../validators/product.validator.js';
-import { createProduct } from '../controllers/product.controller.js';
+import {
+    createProduct,
+    getAllProducts,
+    getProductBySlug
+} from '../controllers/product.controller.js';
 
 const router = Router();
 
+// Public Routes 
+router.get('/', getAllProducts);
+router.get('/:slug', getProductBySlug);
+
+// Protected Admin Routes
 // Route config: Auth check -> Admin check -> Multer uploads -> Input validation -> Controller execution
 router.post(
     '/',

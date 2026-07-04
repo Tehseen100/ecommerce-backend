@@ -2,7 +2,11 @@ import { asyncHandler } from '../utils/asyncHandler.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
 import { ApiError } from '../utils/ApiError.js';
 import { uploadOnCloudinary, deleteFromCloudinary } from '../utils/cloudinaryService.js';
-import { createProductService } from '../services/product.service.js';
+import {
+    createProductService,
+    getAllProductsService,
+    getProductBySlugService
+} from '../services/product.service.js';
 
 export const createProduct = asyncHandler(async (req, res, next) => {
     // Validate that files were uploaded by Multer
@@ -40,4 +44,21 @@ export const createProduct = asyncHandler(async (req, res, next) => {
 
         next(error);
     }
+});
+
+export const getAllProducts = asyncHandler(async (req, res) => {
+    const products = await getAllProductsService();
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, products, "Products fetched successfully"));
+});
+
+export const getProductBySlug = asyncHandler(async (req, res) => {
+    const { slug } = req.params;
+    const product = await getProductBySlugService(slug);
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, product, "Product fetched successfully"));
 });

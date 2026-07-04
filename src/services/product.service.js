@@ -17,3 +17,19 @@ export const createProductService = async (productData, uploadedImages) => {
 
     return product;
 }
+
+export const getAllProductsService = async () => {
+    return await Product.find({})
+        .populate('category', 'name slug') // Internal join to pull the category name and slug
+        .sort({ createdAt: -1 });
+}
+
+// Fetch a single product by its unique URL slug
+export const getProductBySlugService = async (slug) => {
+    const product = await Product.findOne({ slug }).populate('category', 'name slug');
+    if (!product) {
+        throw new ApiError(404, "Product not found");
+    }
+
+    return product;
+}
