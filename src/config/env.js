@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 // Define the schema for your environment variables
 const envSchema = z.object({
-    PORT: z.string().transform((val) => parseInt(val, 10)).default('5000'),
+    PORT: z.string().transform((val) => parseInt(val, 10)).default('3000'),
     MONGODB_URI: z.string().url({ message: "Invalid MongoDB connection string" }),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
     ACCESS_TOKEN_SECRET: z.string().min(10, { message: "Access token secret must be at least 10 chars long" }),

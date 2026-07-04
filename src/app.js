@@ -1,9 +1,10 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import errorHandler from "./middlewares/error.middleware.js";
-import notFound from "./middlewares/notFound.middleware.js";
 import { env } from "./config/env.js";
+import notFound from "./middlewares/notFound.middleware.js";
+import errorHandler from "./middlewares/error.middleware.js";
+import authRouter from './routes/auth.routes.js';
 
 const app = express();
 
@@ -22,6 +23,9 @@ app.get('/health', (req, res) => {
         status: 'OK', message: 'Server is running smoothly'
     });
 });
+
+// API Routes Mounting
+app.use('/api/v1/auth', authRouter);
 
 // Error Handling Middleware
 app.use(notFound);
