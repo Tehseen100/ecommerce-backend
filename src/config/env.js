@@ -10,6 +10,9 @@ const envSchema = z.object({
     ACCESS_TOKEN_EXPIRY: z.string().default('15m'),
     REFRESH_TOKEN_SECRET: z.string().min(10, { message: "Refresh token secret must be at least 10 chars long" }),
     REFRESH_TOKEN_EXPIRY: z.string().default('7d'),
+    CLOUDINARY_CLOUD_NAME: z.string({ required_error: "Cloudinary cloud name is required" }),
+    CLOUDINARY_API_KEY: z.string({ required_error: "Cloudinary API key is required" }),
+    CLOUDINARY_API_SECRET: z.string({ required_error: "Cloudinary API secret is required" }),
 });
 
 // Validate process.env against our schema

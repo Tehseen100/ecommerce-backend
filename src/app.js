@@ -6,6 +6,7 @@ import notFound from "./middlewares/notFound.middleware.js";
 import errorHandler from "./middlewares/error.middleware.js";
 import authRouter from './routes/auth.routes.js';
 import categoryRouter from './routes/category.routes.js';
+import productRouter from './routes/product.routes.js';
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.get('/health', (req, res) => {
 // API Routes Mounting
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/categories', categoryRouter);
+app.use('/api/v1/products', productRouter);
 
 // Error Handling Middleware
 app.use(notFound);
